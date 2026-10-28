@@ -1,0 +1,16 @@
+# Data files (too large for git)
+*.csv
+*.zip
+dataset/loan.csv
+dataset/archive.zip
+clean_loans.csv
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+env/
