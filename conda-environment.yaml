@@ -1,0 +1,6 @@
+name: machinelearning
+channels:
+  - https://conda.anaconda.org/conda-forge
+dependencies:
+  - ipykernel
+prefix: /home/desktop/.conda/envs/machinelearning
