@@ -1,5 +1,27 @@
+import hashlib
+
+import numpy as np
+from sklearn.model_selection import StratifiedKFold
+
+DATA_PATH = "../dataset/50-50undersampled.csv"  # built by DataVisualization.ipynb
 TEST_SIZE = 0.20
 RANDOM_STATE = 42
+N_FOLDS = 5
+
+
+def make_kfold():
+    """The 5 CV folds every model uses (same seed -> same folds in every notebook)."""
+    return StratifiedKFold(n_splits=N_FOLDS, shuffle=True, random_state=RANDOM_STATE)
+
+
+def split_fingerprint(X_train, X_test, y_train):
+    """Short ID for the test rows + CV folds. If two notebooks print the same
+    fingerprint, they tested on the exact same rows and used the exact same folds."""
+    test_id = hashlib.md5(np.asarray(X_test.index, dtype=np.int64).tobytes()).hexdigest()[:10]
+    train_index = np.asarray(X_train.index, dtype=np.int64)
+    fold_rows = np.concatenate([train_index[val] for _, val in make_kfold().split(X_train, y_train)])
+    fold_id = hashlib.md5(fold_rows.tobytes()).hexdigest()[:10]
+    return f"test={test_id} folds={fold_id}"
 
 IMPUTE_COLS = [
     "num_tl_120dpd_2m",
