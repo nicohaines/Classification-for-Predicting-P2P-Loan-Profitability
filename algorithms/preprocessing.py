@@ -4,6 +4,8 @@ import numpy as np
 from sklearn.model_selection import StratifiedKFold
 
 DATA_PATH = "../dataset/50-50undersampled.csv"  # built by DataVisualization.ipynb
+TRAIN_DATA_PATH = "../dataset/train.csv"
+TEST_DATA_PATH = "../dataset/test.csv"
 TEST_SIZE = 0.20
 RANDOM_STATE = 42
 N_FOLDS = 5
